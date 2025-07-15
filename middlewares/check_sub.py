@@ -11,7 +11,7 @@ class CheckSubscription(BaseMiddleware):
         event: Message,
         data: Dict[str, Any]
     ) -> Any:
-        chat_member=await event.bot.get_chat_member(-895247719,event.from_user.id)
+        chat_member=await event.bot.get_chat_member(-1002534293193,event.from_user.id)
         if chat_member.status == "left":
             await event.answer(
                 "Подпишитесь на мой телеграмм канал,чтобы пользоваться ботом!",
