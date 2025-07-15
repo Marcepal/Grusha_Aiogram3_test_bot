@@ -6,7 +6,7 @@ from aiogram.types import (
 sub_channel = InlineKeyboardMarkup(
     inline_keyboard=[
         [
-            InlineKeyboardButton(text="подписаться на канал", url="https://t.me/KLAIN055")
+            InlineKeyboardButton(text="подписаться на канал", url="https://t.me/klainnavigator")
 
         ]
     ]
