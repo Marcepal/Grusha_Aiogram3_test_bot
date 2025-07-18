@@ -17,7 +17,7 @@ from aiogram.utils.markdown import hide_link
 from aiogram.utils.media_group import MediaGroupBuilder
 from aiogram.filters import Command,CommandObject,CommandStart,MagicData
 from keyboards import reply
-from filters.is_admin import IsAdmin
+# from filters.is_admin import IsAdmin
 from filters.find_usernames import HasUsernamesFilter
 from keyboards.fabrics import get_keyboard,get_keyboard_fab
 from typing import List
@@ -413,10 +413,10 @@ async def callback_checkin(callback: CallbackQuery):
         text="Спасибо, что подтвердили своё присутствие!",
         show_alert=True
     )
-@router.message(Command("admin"),IsAdmin(895247719))
-async def  start2(message: Message):
-    # новое (сообщения с разметкой)
-    await message.answer(f"с возвращением админ KLAIN_05")
+# @router.message(Command("admin"),IsAdmin(895247719))
+# async def  start2(message: Message):
+#     # новое (сообщения с разметкой)
+#     await message.answer(f"с возвращением админ KLAIN_05")
 
 
 # разобраться в этом коде и написать коментарии к нему

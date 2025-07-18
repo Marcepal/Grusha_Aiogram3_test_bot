@@ -39,16 +39,18 @@ async def main():
         pagination.router,
         questionaire.router,
         bot_messages.router,
-        events_in_group.router,
-        admin_changes_in_group.router
+        events_in_group.router
+        # admin_changes_in_group.router
 
     )
     # сохраняем в переменнную всех админов из указанного айди чата
-    admins = await bot.get_chat_administrators(-1002213553426)
+    #выключили так как для канала это будет мешать
+    # admins = await bot.get_chat_administrators(-1002213553426)
     # тут мы перебираем всех администраторов из списка `admins` и сохраняем каждого админа как уникального
-    admin_ids = {admin.user.id for admin in admins}
+    # admin_ids = {admin.user.id for admin in admins}
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot, admins = admin_ids)
+    # await dp.start_polling(bot, admins = admin_ids)
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
