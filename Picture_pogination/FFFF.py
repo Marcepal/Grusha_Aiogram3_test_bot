@@ -14,8 +14,11 @@ class PaginateCb(CallbackData, prefix="pg"):
 
 # Автоматический поиск изображений
 def get_image_paths():
+    # Папка с изображениями лежит рядом с файлом скрипта
     current_dir = Path(__file__).resolve().parent
-    images_dir = current_dir / "C:/Users/ANDRE/PycharmProjects/pythonProject16/images for FFFF"
+    images_dir = current_dir / "images_for_ffff"  # папка без пробелов и без C:/
+    images_dir.mkdir(parents=True, exist_ok=True)  # создаём, если её нет
+
     return sorted([
         str(p) for p in images_dir.iterdir()
         if p.is_file() and p.suffix.lower() in ('.jpg', '.jpeg', '.png')

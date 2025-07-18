@@ -1,4 +1,4 @@
-
+from pathlib import Path
 from aiogram import Router, F,Bot
 from aiogram.types import Message
 from aiogram.filters import Command
@@ -55,24 +55,33 @@ async def form_about(message: Message, state: FSMContext):
         await state.set_state(Form.photo)
         await message.answer("Теперь отправь свое фото")
 
+
+
 @router.message(Form.photo, F.photo)
-async def  form_photo(message: Message, state: FSMContext,bot: Bot):
-    photo_file_id=message.photo[-1].file_id
+async def form_photo(message: Message, state: FSMContext, bot: Bot):
+    photo_file_id = message.photo[-1].file_id
     data = await state.get_data()
-    # новое (эти штуки если присылаешь боту фото или стикер сохраняет их в папку на пк)
+
+    # Путь к папке tmp рядом со скриптом
+    current_dir = Path(__file__).resolve().parent
+    tmp_dir = current_dir / "tmp"
+    tmp_dir.mkdir(parents=True, exist_ok=True)  # создаём, если нет
+
+    save_path = tmp_dir / f"{photo_file_id}.jpg"
+
+    # Сохраняем фото
     await bot.download(
         message.photo[-1],
-        destination=f"C:/Users/ANDRE/OneDrive/Рабочий стол/tmp/{message.photo[-1].file_id}.jpg"
+        destination=save_path
     )
+
     await state.clear()
-    formatted_text = []
-    [
-        formatted_text.append(f"{key}: {value}")
-        for key, value in data.items()]
+
+    formatted_text = [f"{key}: {value}" for key, value in data.items()]
 
     await message.answer_photo(
-        photo_file_id,
-        "\n".join(formatted_text)
+        photo=photo_file_id,
+        caption="\n".join(formatted_text)
     )
 @router.message(Form.photo, ~F.photo)
 async def incorrect_form_photo(message: Message, state: FSMContext):
