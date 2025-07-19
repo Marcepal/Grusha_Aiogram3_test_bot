@@ -18,7 +18,9 @@ def get_image_paths():
     current_dir = Path(__file__).resolve().parent
     images_dir = current_dir / "images for FFFF"  # папка без пробелов и без C:/
     images_dir.mkdir(parents=True, exist_ok=True)  # создаём, если её нет
-
+    print(f"[DEBUG] images_dir: {images_dir}")
+    print(f"[DEBUG] exists: {images_dir.exists()}")
+    print(f"[DEBUG] files found: {[str(p.name) for p in images_dir.iterdir() if p.is_file()]}")
     return sorted([
         str(p) for p in images_dir.iterdir()
         if p.is_file() and p.suffix.lower() in ('.jpg', '.jpeg', '.png')
