@@ -16,7 +16,7 @@ class PaginateCb(CallbackData, prefix="pg"):
 def get_image_paths():
     # Папка с изображениями лежит рядом с файлом скрипта
     current_dir = Path(__file__).resolve().parent
-    images_dir = current_dir / "images_for_ffff"  # папка без пробелов и без C:/
+    images_dir = current_dir / "images for FFFF"  # папка без пробелов и без C:/
     images_dir.mkdir(parents=True, exist_ok=True)  # создаём, если её нет
 
     return sorted([
